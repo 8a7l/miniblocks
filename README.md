@@ -25,7 +25,7 @@ which you can craft into any of the 21 forms.
 |-------|--------------------------|
 | Axe   | Wood, logs, planks       |
 | Pickaxe | Stone, metal, glass, obsidian |
-| Sword | Wool, leaves             |
+| Sword | Wool                     |
 
 Hold **right-click** on a block with the matching tool to slice it.
 The tool wears down as if you were mining normally.
