@@ -11,7 +11,6 @@ using standard tools.
 - **Tool-based cutting** — hold right-click with the right tool to slice a block
 - **Crafting** — reassemble forms into full blocks or split them into particles
 - **Colored glass** — 12 color variants, crafted with dye
-- **Rotatable** — particles act as a screwdriver (LMB / RMB to rotate forms)
 - **Fully translatable** — includes Ukrainian and English
 
 ## How it works
