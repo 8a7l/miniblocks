@@ -37,7 +37,7 @@ The tool wears down as if you were mining normally.
 - **N particles → Form N** (shaped 3×3 recipe)
 - **Form N → N particles** (shapeless)
 
-The direct "block → 8 particles" recipe is **disabled** — particles can
+Particles can
 only be obtained by cutting blocks with tools.
 
 ## Colored glass
