@@ -21,11 +21,11 @@ which you can craft into any of the 21 forms.
 
 ## Tools
 
-| Tool  | Materials                |
-|-------|--------------------------|
-| Axe   | Wood, logs, planks       |
-| Pickaxe | Stone, metal, glass, obsidian |
-| Sword | Wool                     |
+| Tool    | Materials                      |
+|---------|--------------------------------|
+| Axe     | Wood, logs, planks             |
+| Pickaxe | Stone, metal, glass, obsidian  |
+| Sword   | Wool                           |
 
 Hold **right-click** on a block with the matching tool to slice it.
 The tool wears down as if you were mining normally.
@@ -37,8 +37,7 @@ The tool wears down as if you were mining normally.
 - **N particles → Form N** (shaped 3×3 recipe)
 - **Form N → N particles** (shapeless)
 
-Particles can
-only be obtained by cutting blocks with tools.
+Particles can only be obtained by cutting blocks with tools.
 
 ## Colored glass
 
@@ -55,10 +54,18 @@ your world settings. Requires `default` (Minetest Game). Optional:
 ## License
 
 - **Code**: GNU General Public License v3.0 or later (see LICENSE)
-- **Textures and sounds**: from Minetest Game, licensed under
-  CC BY-SA 3.0 (see [Minetest Game license](https://github.com/minetest/minetest_game/blob/master/LICENSE.txt))
 
 This mod is free software: you can redistribute it and/or modify it
 under the terms of the GNU General Public License as published by the
 Free Software Foundation, either version 3 of the License, or (at your
 option) any later version.
+
+### Media
+
+This package contains **no media files** — no textures, sounds, or models
+are included in the archive.
+
+All textures and sounds used by this mod are referenced **at runtime** from
+the Minetest Game `default` mod and are licensed under
+[CC BY-SA 3.0](https://github.com/minetest/minetest_game/blob/master/LICENSE.txt)
+by their respective authors.
