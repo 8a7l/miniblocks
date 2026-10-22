@@ -48,6 +48,12 @@ function miniblocks.register_colored_glass(color_name, color_hex, color_display)
 	-- Суцільний колір без текстури скла.
 	local tex = "[fill:16x16:" .. color_hex .. "^[opacity:70"
 
+	-- Звуки беремо з default:glass (дзенькіт скла).
+	-- Інакше Luanti підставить кам'яні звуки за замовчуванням —
+	-- і кольорове скло бряжчатиме як камінь.
+	local glass_sounds = (minetest.registered_nodes["default:glass"] or {}).sounds
+		or minetest.node_sound_glass_defaults()
+
 	minetest.register_node(":" .. node_name, {
 		description = S("Colored Glass (@1)", S(color_display)),
 		drawtype = "allfaces_optional",
@@ -55,6 +61,7 @@ function miniblocks.register_colored_glass(color_name, color_hex, color_display)
 		use_texture_alpha = "blend",
 		paramtype = "light",
 		sunlight_propagates = true,
+		sounds = glass_sounds,
 		groups = { cracky = 3, glass = 1, oddly_breakable_by_hand = 3 },
 	})
 

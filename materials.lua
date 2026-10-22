@@ -37,8 +37,41 @@ end
 
 miniblocks.get_material_name = get_material_name
 
+-- Групи, які дозволено копіювати на мініблоки (частинки та форми).
+--
+-- ВАЖЛИВО: НЕ копіюємо групи-ідентифікатори матеріалу (wood, tree,
+-- stone, sand, glass, wool, coal, papyrus, book, тощо). Інакше рецепти
+-- інших модів помилково спрацьовуватимуть на мініблоках. Приклад:
+--   default:stick: {"group:wood"}, {"group:wood"}  → 4 палки
+-- Якщо мініблок дерева має wood=1 — дві форми вертикально
+-- перетворюються на палки, перехоплюючи наш shapeless-рецепт.
+--
+-- Залишаємо лише "поведінкові" групи: інструмент, рівень, горючість,
+-- видимість у креативі тощо.
+local KEEP_GROUPS = {
+	-- Групи інструментів (визначають, чим і як швидко копається)
+	cracky  = true,
+	choppy  = true,
+	snappy  = true,
+	crumbly = true,
+	fleshy  = true,
+	level   = true,
+	-- Поведінка при копанні
+	oddly_breakable_by_hand = true,
+	dig_immediate = true,
+	handy = true,
+	-- Фізичні властивості
+	flammable = true,
+	slippery  = true,
+	-- Видимість у GUI
+	not_in_creative_inventory = true,
+	not_in_craft_guide = true,
+}
 
-local function copy_material_properties(def)
+-- is_particle = true  → частинка: групи не потрібні взагалі
+--                      (вона не ставиться у світ, pointable=false).
+-- is_particle = false → форма: копіюємо лише whitelist-групи.
+local function copy_material_properties(def, is_particle)
 	local properties = {
 		tiles             = def.tiles,
 		sounds            = def.sounds,
@@ -64,10 +97,13 @@ local function copy_material_properties(def)
 		properties.use_texture_alpha = "blend"
 	end
 
-	if def.groups then
-		properties.groups = {}
+	-- Групи: частинка — порожні, форма — лише whitelist.
+	properties.groups = {}
+	if not is_particle and def.groups then
 		for gname, gvalue in pairs(def.groups) do
-			properties.groups[gname] = gvalue
+			if KEEP_GROUPS[gname] then
+				properties.groups[gname] = gvalue
+			end
 		end
 	end
 
@@ -99,7 +135,7 @@ function miniblocks.register_material(node_name)
 	}
 
 	-- Частинка (не ставиться, не світиться в креативі)
-	local particle_props = copy_material_properties(def)
+	local particle_props = copy_material_properties(def, true)
 	particle_props.description = def.description .. " " .. S("Mini Block Particle")
 	particle_props.drawtype = "nodebox"
 	particle_props.node_box = miniblocks.mask_to_node_box(1)
@@ -118,7 +154,7 @@ function miniblocks.register_material(node_name)
 
 	-- 21 форма
 	for _, shape in ipairs(miniblocks.shapes) do
-		local properties = copy_material_properties(def)
+		local properties = copy_material_properties(def, false)
 
 		properties.description = def.description .. " "
 			.. S("Mini Block Form @1", shape.name)
