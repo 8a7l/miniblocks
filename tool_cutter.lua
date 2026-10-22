@@ -338,3 +338,11 @@ minetest.register_on_mods_loaded(function()
 		end
 	end
 end)
+
+-- Очищення стану різання при виході гравця (запобігає витоку пам'яті)
+minetest.register_on_leaveplayer(function(player)
+	local name = player:get_player_name()
+	if cutting[name] then
+		cutting[name] = nil
+	end
+end)
